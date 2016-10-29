@@ -62,7 +62,7 @@ bundle install
 ### Drivers: ###
 Install and include in PATH
 - [chromedriver](https://sites.google.com/a/chromium.org/chromedriver/)
-- Mac: ```shell
+- Mac: ```
 brew install chromedriver``` 
 
 
