@@ -1,6 +1,7 @@
 require 'capybara'
 require 'selenium-webdriver'
 require 'chunky_png'
+require 'os'
 
 URL = ARGV[0]
 SELECTOR = ARGV[1]
@@ -36,11 +37,15 @@ session.save_screenshot('original_image.png')
 image = ChunkyPNG::Image.from_file('original_image.png')
 
 # get positions X, Y, width and height
-left = location['x'] * 2
-top = location['y'] * 2
-right = size['width'] * 2
-bottom = size['height'] * 2
+left = location['x']
+top = location['y']
+right = size['width']
+bottom = size['height']
 
 # crop original image
-image.crop!(left , top, right, bottom)
+if OS.mac?
+  image.crop!(left * 2 , top * 2, right * 2, bottom * 2)
+else
+  image.crop!(left , top, right, bottom)
+end
 image.save('croped.png')
